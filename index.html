@@ -197,6 +197,25 @@
                 font-size: 1.8em;
             }
         }
+
+     
+        video {
+            text-align: center;
+            margin: 40px 0;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        video {
+            width: 80%;
+            max-width: 600px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: center;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
@@ -234,9 +253,10 @@
         </div>
     </section>
 
-    <section class="video-teaser">
-        <img src="play-button.png" alt="Play" class="play-btn">
-    </section>
+            <video controls>
+                <source src="video.MP4" type="video/mp4">
+                Сіздің браузеріңіз бұл видеоны ойната алмайды.
+            </video>
 
     <section class="inspiration-quote">
         <div class="container">
