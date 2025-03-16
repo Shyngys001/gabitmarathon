@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7 күнде 5-7 кг арықтау!</title>
+    <style>
+        :root {
+            --red: #FF3B3F;
+            --green: #00C49A;
+            --dark: #2D3047;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(45deg, var(--green), var(--red));
+            color: white;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin: 20px 0;
+            animation: fadeIn 1s;
+        }
+
+        /* Intro section */
+        .intro {
+            text-align: center;
+            padding: 50px 0;
+            background: #f9f9f9;
+        }
+
+        /* Sections */
+        .section {
+            padding: 50px 0;
+            border-bottom: 2px solid #eee;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Video section */
+        .video-teaser {
+            position: relative;
+            height: 600px;
+            background: url('https://example.com/video-preview.jpg') center/cover;
+            margin: 50px 0;
+        }
+
+        .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .play-btn:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* CTA Button */
+        .cta-btn {
+            display: block;
+            width: 300px;
+            margin: 30px auto;
+            padding: 20px 40px;
+            background: var(--red);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            box-shadow: 0 10px 20px rgba(255,59,63,0.3);
+            transition: all 0.3s;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(255,59,63,0.4);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile styles */
+        @media (max-width: 768px) {
+            .cta-btn {
+                width: 90%;
+                bottom: 10px;
+                right: 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>7 КҮНДЕ 5-7 КГ АРЫҚТАУ!<br><small>(Әрине, егер түнде тоңазытқышпен құшақтасып ұйықтамасаң 😆)</small></h1>
+        </div>
+    </header>
+
+    <section class="intro">
+        <div class="container">
+            <h2>Бұл марафон – сен күткен мүмкіншілік!<br>Бізбен бірге 7 күнде арықтап, өзіңді керемет сезін!</h2>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 style="color: var(--green);">Бұл марафон сізге керек пе?</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>✔ Спортсыз арықтағысы келетіндерге</h3>
+                    <p>Біздің тәсіл - тамақтануды ғылыми тұрғыдан құру!</p>
+                </div>
+                <div class="card">
+                    <h3>✔ Диеталардан шаршағандарға</h3>
+                    <p>Ешқандай аштық - тек дұрыс тамақтану!</p>
+                </div>
+                <div class="card">
+                    <h3>✔ "Мен қайда жоғалып кеттім?" дейтіндерге 😅</h3>
+                    <p>Нәтижелер сені таң қалдырады!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="video-teaser">
+        <img src="play-button.png" alt="Play" class="play-btn">
+    </section>
+
+    <a href="#register" class="cta-btn">ҚАЗІР ҚАТЫСАМЫН! 🔥</a>
+
+    <script>
+        // Simple animation on scroll
+        window.addEventListener('scroll', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                if (cardTop < window.innerHeight - 100) {
+                    card.style.opacity = '1';
+                }
+            });
+        });
+
+        // CTA button click
+        document.querySelector('.cta-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Қош келдіңіз! Жазылым парақшасы жетінше күте тұрыңыз...');
+        });
+    </script>
+</body>
+</html>
