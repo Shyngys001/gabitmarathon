@@ -9,17 +9,30 @@
             --red: #FF3B3F;
             --green: #00C49A;
             --dark: #2D3047;
+            --bg: #ffffff;
+            --text: #333333;
+            --card-bg: #f8f9fa;
+        }
+
+        [data-theme="dark"] {
+            --bg: #1a1a1a;
+            --text: #e0e0e0;
+            --card-bg: #2d2d2d;
+            --dark: #f8f9fa;
         }
 
         * {
             box-sizing: border-box;
             font-family: 'Arial', sans-serif;
+            transition: background 0.3s, color 0.3s;
         }
 
         body {
             margin: 0;
             padding: 0;
             scroll-behavior: smooth;
+            background: var(--bg);
+            color: var(--text);
         }
 
         .container {
@@ -28,31 +41,43 @@
             padding: 20px;
         }
 
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--green);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
         /* Header */
         .header {
             text-align: center;
             padding: 40px 0;
+            animation: gradient 8s ease infinite;
             background: linear-gradient(45deg, var(--green), var(--red));
+            background-size: 400% 400%;
             color: white;
         }
 
         h1 {
             font-size: 2.5em;
             margin: 20px 0;
-            animation: fadeIn 1s;
-        }
-
-        /* Intro section */
-        .intro {
-            text-align: center;
-            padding: 50px 0;
-            background: #f9f9f9;
+            animation: float 4s ease-in-out infinite;
         }
 
         /* Sections */
         .section {
             padding: 50px 0;
-            border-bottom: 2px solid #eee;
+            border-bottom: 2px solid var(--card-bg);
         }
 
         .grid {
@@ -65,6 +90,7 @@
         .card {
             padding: 25px;
             border-radius: 15px;
+            background: var(--card-bg);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: transform 0.3s;
         }
@@ -79,6 +105,8 @@
             height: 600px;
             background: url('https://example.com/video-preview.jpg') center/cover;
             margin: 50px 0;
+            border-radius: 20px;
+            overflow: hidden;
         }
 
         .play-btn {
@@ -89,10 +117,6 @@
             width: 80px;
             cursor: pointer;
             transition: transform 0.3s;
-        }
-
-        .play-btn:hover {
-            transform: translate(-50%, -50%) scale(1.1);
         }
 
         /* CTA Button */
@@ -116,35 +140,75 @@
             z-index: 100;
         }
 
-        .cta-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 30px rgba(255,59,63,0.4);
+        /* Quote section */
+        .inspiration-quote {
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+
+        .inspiration-quote.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .inspiration-quote::before,
+        .inspiration-quote::after {
+            content: '"';
+            font-size: 4em;
+            color: var(--green);
+            position: absolute;
+            opacity: 0.3;
+        }
+
+        .inspiration-quote::before {
+            left: 10%;
+            top: 0;
+        }
+
+        .inspiration-quote::after {
+            right: 10%;
+            bottom: 0;
         }
 
         /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
         }
 
-        /* Mobile styles */
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         @media (max-width: 768px) {
             .cta-btn {
                 width: 90%;
-                bottom: 10px;
                 right: 5%;
+            }
+            
+            h1 {
+                font-size: 1.8em;
             }
         }
     </style>
 </head>
 <body>
+    <div class="theme-toggle">🌓</div>
+
     <header class="header">
         <div class="container">
             <h1>7 КҮНДЕ 5-7 КГ АРЫҚТАУ!<br><small>(Әрине, егер түнде тоңазытқышпен құшақтасып ұйықтамасаң 😆)</small></h1>
         </div>
     </header>
 
-    <section class="intro">
+    <section class="section">
         <div class="container">
             <h2>Бұл марафон – сен күткен мүмкіншілік!<br>Бізбен бірге 7 күнде арықтап, өзіңді керемет сезін!</h2>
         </div>
@@ -174,22 +238,47 @@
         <img src="play-button.png" alt="Play" class="play-btn">
     </section>
 
+    <section class="inspiration-quote">
+        <div class="container">
+            <p class="quote-text">"Денеңді сүю - бұл өзіңе деген махаббатыңның бірінші қадамы. Және біз сенің осы қадамды жасауыңа көмектесейік!"</p>
+            <p>- Ғабит & команда</p>
+        </div>
+    </section>
+
     <a href="#register" class="cta-btn">ҚАЗІР ҚАТЫСАМЫН! 🔥</a>
 
     <script>
-        // Simple animation on scroll
-        window.addEventListener('scroll', function() {
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
+        // Theme Toggle
+        const themeToggle = document.querySelector('.theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.setAttribute('data-theme', 
+                document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'
+            );
+        });
+
+        // Quote Animation
+        const quoteSection = document.querySelector('.inspiration-quote');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.5 });
+        observer.observe(quoteSection);
+
+        // Card Animations
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.card').forEach(card => {
                 const cardTop = card.getBoundingClientRect().top;
-                if (cardTop < window.innerHeight - 100) {
+                if(cardTop < window.innerHeight - 100) {
                     card.style.opacity = '1';
                 }
             });
         });
 
-        // CTA button click
-        document.querySelector('.cta-btn').addEventListener('click', function(e) {
+        // CTA Button
+        document.querySelector('.cta-btn').addEventListener('click', (e) => {
             e.preventDefault();
             alert('Қош келдіңіз! Жазылым парақшасы жетінше күте тұрыңыз...');
         });
